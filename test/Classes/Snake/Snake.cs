@@ -12,7 +12,7 @@ namespace SnakeTest.Classes
             Head = node;
         }
         public INode Head { get; set; }
-        public bool Eating { get; set; }
+        public bool IsEating { get; set; }
         public void Move(INode node, INode[,] matrix)
         {
             INode foodloc = null;
@@ -21,7 +21,7 @@ namespace SnakeTest.Classes
             {
                 Head = new Node(node.X, node.Y);
                 matrix[node.X, node.Y] = Head;
-                Eating = true;
+                IsEating = true;
                 foodloc = Pipeline.GenerateFood(matrix, this);
             }
             else
@@ -30,7 +30,7 @@ namespace SnakeTest.Classes
             }
 
             List<INode> changed = new List<INode>();
-            if (Eating)
+            if (IsEating)
             {
 
             }
@@ -39,7 +39,7 @@ namespace SnakeTest.Classes
                 changed.Add(Body.ElementAt(Body.Count - 1));
                 Body.RemoveAt(Body.Count - 1);
             }
-            Eating = false;
+            IsEating = false;
 
             foreach (INode bodyNode in Body)
             {
@@ -51,7 +51,7 @@ namespace SnakeTest.Classes
             Pipeline.Draw(changed, this);
         }
         public List<INode> Body { get; set; } = new List<INode>();
-        public byte Direction { get; set; } = 0b0001;
+        public byte Direction { get; set; } = Constants.UP; //default direction
         public void ChangeDirection(byte direction)
         {
             var XORDir = (Direction ^ direction);
@@ -60,15 +60,6 @@ namespace SnakeTest.Classes
                 return;
             }
             Direction = direction;
-        }
-        public void Push(Node node)
-        {
-            Body.Add(node);
-        }
-
-        public void Pop()
-        {
-            Body.RemoveAt(Body.Count() - 1);
         }
         public bool IsValid()
         {

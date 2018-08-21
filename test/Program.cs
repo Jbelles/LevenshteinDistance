@@ -22,15 +22,4 @@ public class Program
             Pipeline.Update(matrix, player);
         }
     }
-
-
-
-    public static void ValidateLocation()
-    {
-        if (Player.Head is Wall || Player.Body.Contains(Player.Head))
-            exit = true;
-    }
-    
-
-    
 }

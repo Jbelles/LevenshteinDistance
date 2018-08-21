@@ -95,7 +95,7 @@ namespace SnakeTest.Classes
                         }
                 }
             }
-            Thread.Sleep(100);
+            Thread.Sleep(70);
         }
 
         public static void Update(INode[,] matrix, Snake player)
